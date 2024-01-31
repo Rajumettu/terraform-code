@@ -9,13 +9,13 @@ In sg.tf, all the required rules for the security group is created
 In VPC.tf -- a VPC is created with 2 subnets in different AZs
 In Ec2.tf -- 2 Ec2 instances are launched in different subnet using terraform function.
 when you run the terraform apply, it will ask for true or false
-Pass the value true.
+Pass the value 'true'.
 
 Task 2- Automate Using terraform in which you need to delete the rule TCP which attach with public in my-securitygroup.
 
 Solution---------------
 To achieve the above task, we run the terraform apply, it will ask for true or false
-Pass the value false for deleting the security group TCP rule which is created earlier. 
+Pass the value 'false' for deleting the security group TCP rule which is created earlier. 
 
 
 
