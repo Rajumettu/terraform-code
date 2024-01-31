@@ -1,6 +1,6 @@
 # Terraform AWS Infrastructure Deployment
 Note
-Task1-- Task 1- Create an Ec2 instance and attach a VPC with a name of myvpu-demo using terraform 
+Task 1- Create an Ec2 instance and attach a VPC with a name of myvpu-demo using terraform 
 Note-Create a security group and attach HTTP, HTTPS, and TCP protocol to the public with the name of my-securitygroup using terraform.
 
 Solution---------------- 
