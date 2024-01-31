@@ -2,6 +2,7 @@
 Note
 Task1-- Task 1- Create an Ec2 instance and attach a VPC with a name of myvpu-demo using terraform 
 Note-Create a security group and attach HTTP, HTTPS, and TCP protocol to the public with the name of my-securitygroup using terraform.
+
 Solution---------------- 
 To achieve the above task VPC.tf, sg.tf, Ec2.tf are created.
 In sg.tf, all the required rules for the security group is created
@@ -11,6 +12,7 @@ when you run the terraform apply, it will ask for true or false
 Pass the value true.
 
 Task 2- Automate Using terraform in which you need to delete the rule TCP which attach with public in my-securitygroup.
+
 Solution---------------
 To achieve the above task, we run the terraform apply, it will ask for true or false
 Pass the value false for deleting the security group TCP rule which is created earlier. 
