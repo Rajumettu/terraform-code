@@ -1,55 +1,46 @@
-# terraform-code
-This repository contains Terraform code to deploy an AWS infrastructure consisting of a Virtual Private Cloud (VPC), public subnets, an Internet Gateway, a security group, and EC2 instances. The infrastructure is defined using HashiCorp Terraform, and it aims to provide a scalable and secure environment for hosting applications.
+# Terraform AWS Infrastructure Deployment
 
-Terraform Files
-main.tf
-This file defines the main AWS resources, including EC2 instances, security groups, VPC, subnets, route tables, and an Internet Gateway. Key features include:
+## Prerequisites
+1. [Terraform](https://www.terraform.io/downloads.html) installed on your local machine.
+2. AWS credentials configured with the necessary permissions.
+3. pem key.
 
-EC2 Instance: Launches an EC2 instance in each specified subnet with a dynamic count based on the length of var.subnets_cidr. Instances are tagged with a unique name and associated with a security group.
+## Usage
 
-Security Group: Creates a security group (mysecuritygroup) with ingress rules specified in var.sgports and egress rule allowing all traffic. This security group is associated with the EC2 instances.
+1. Clone the repository to your local machine.
+    ```bash
+    git clone https://github.com/yourusername/your-repo.git
+    cd your-repo
+    ```
 
-VPC: Defines a Virtual Private Cloud with a specified CIDR block (var.vpc_cidr) and tags it with a name.
+2. Update the `variables.tf` file with your desired values.
+    - Set the `aws_region` variable to your preferred AWS region.
+    - Adjust the `vpc_cidr` variable to the desired CIDR block for the VPC.
+    - Customize `subnets_cidr` with the CIDR blocks for your subnets.
+    - Modify `azs` to match your preferred availability zones.
+    - Adjust `sgports` to specify the allowed ports for the security group.
+    - Set `aws_ami_id` to the desired Amazon Machine Image (AMI) ID for your EC2 instances.
+    - Optionally, set `remove_tcp_rule` to `true` if you want to remove a specific TCP rule from the security group.
 
-Internet Gateway: Creates an Internet Gateway and associates it with the VPC.
+3. Initialize the Terraform configuration.
+    ```bash
+    terraform init
+    ```
 
-Subnets: Defines public subnets with specified CIDR blocks and availability zones. Enables automatic assignment of public IPs (map_public_ip_on_launch).
+4. Review the execution plan.
+    ```bash
+    terraform plan
+    ```
 
-Route Table: Sets up a route table (mypublicRT) with a default route to the Internet Gateway.
+5. Apply the Terraform configuration to create the AWS infrastructure.
+    ```bash
+    terraform apply
+    ```
 
-variables.tf
-This file declares the input variables used in the main Terraform script. Key variables include:
+6. After the deployment is complete, you will see the outputs, including the public IP addresses of the EC2 instances.
 
-var.aws_ami_id: The AMI (Amazon Machine Image) ID for the EC2 instances.
-var.subnets_cidr: List of CIDR blocks for subnets.
-var.sgports: Map of ingress ports for the security group.
-var.vpc_cidr: CIDR block for the VPC.
-var.azs: List of availability zones for subnets.
-outputs.tf
-This file declares the outputs that will be displayed after the Terraform apply. Currently, it outputs the public IP addresses of the EC2 instances.
+## Clean Up
 
-How to Use
-Install Terraform: Make sure Terraform is installed on your machine.
-
-AWS Credentials: Ensure your AWS credentials are configured either by setting environment variables or using the AWS CLI.
-
-Clone Repository: Clone this repository to your local machine.
-
-Initialize Terraform: Run terraform init in the directory containing the Terraform files.
-
-Adjust Variables: Modify the values in variables.tf if needed.
-
-Deploy Infrastructure: Run terraform apply and confirm to deploy the AWS infrastructure.
-
-Destroy Infrastructure (Optional): If needed, run terraform destroy to tear down the deployed infrastructure.
-
-Notes
-Ensure that your AWS IAM user has the necessary permissions to create and manage the specified resources.
-
-Review and customize security group rules and other settings based on your specific requirements.
-
-The default instance type is t2.micro. Adjust the instance_type variable in main.tf for different instance types.
-
-Be cautious with exposing sensitive information such as AWS credentials and private keys.
-
-For more details on Terraform commands and options, refer to the Terraform Documentation.
+To destroy the deployed infrastructure and clean up resources:
+```bash
+terraform destroy
